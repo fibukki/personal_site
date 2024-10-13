@@ -2,7 +2,7 @@
   font-family: "Dune Rise Regular";
   font-style: normal;
   font-weight: normal;
-  src: local("Dune Rise Regular"), url("/dune-rise-cufonfonts-webfont/Dune_Rise.woff") format("woff");
+  src: local("Dune Rise Regular"), url("dune-rise-cufonfonts-webfont/Dune_Rise.woff") format("woff");
 }
 
 @font-face {
