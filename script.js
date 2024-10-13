@@ -1,12 +1,12 @@
 "use strict";
 //////// SETUP
 const settings = [
-    [32, 64, 0.02, 0.67],
+    [32, 64, 0.04, 2],
     [64, 64, 0.02, 0.67],
-    [128, 64, 0.01, 0.33], // 2
+    [128, 64, 0.01, 0.33],
 ];
 // settings index
-const S = 1;
+const S = 0;
 const side = settings[S][0];
 const height = settings[S][1];
 const scale = settings[S][2];
@@ -107,7 +107,8 @@ var A;
 }
 //////// MESH PROGRAM
 const mesh = (() => {
-    const vert = /*glsl*/ `#version 300 es
+    const vert = /*glsl*/ 
+    `#version 300 es
   layout(location=${A.ID})   in ivec3 id;
   layout(location=${A.POS})  in vec3 pos;
   layout(location=${A.IPOS}) in vec3 ipos;
@@ -207,7 +208,7 @@ const life = (() => {
   float random() {
     float v = hash(gl_FragCoord.y - time);
     v = hash(gl_FragCoord.x + time * v);
-    return step(0.957, v);
+    return step(0.945, v);
   }
 
   void main() {
@@ -270,7 +271,7 @@ function render() {
         mov_y(wmat, scale);
         gl.uniformMatrix4fv(wmat_loc, false, wmat);
     }
-    rot_y(rmat, Math.PI / 128);
+    rot_y(rmat, Math.PI / 256);
     gl.uniformMatrix4fv(rmat_loc, false, rmat);
     gl.bindTexture(gl.TEXTURE_2D, life_wrt.txt);
     gl.drawArraysInstanced(gl.TRIANGLES, 0, 30, N);
