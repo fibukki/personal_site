@@ -161,14 +161,63 @@ const mesh = (() => {
 
     gl_Position = proj * wmat * vec4(p.xyz * ${scale}, 1);
   }`;
-    const frag = /*glsl*/ `#version 300 es
+  const frag = /*glsl*/ `#version 300 es
   precision highp float;
   in vec3 color;
   out vec3 Color;
   void main() {
     Color = color;
   }`;
-    const pr = new_program(vert, frag);
+
+  //colored for light mode
+//   const frag = /*glsl*/ `#version 300 es
+//   precision highp float;
+//   in vec3 color; // Input color from vertex shader (for gradient control)
+//   out vec4 Color;
+
+//   vec3 hsv2rgb(vec3 c) {
+//     vec4 K = vec4(1.0, 2.0 / 3.0, 1.0 / 3.0, 3.0);
+//     vec3 p = abs(fract(c.xxx + K.xyz) * 6.0 - K.www);
+//     return c.z * mix(K.xxx, clamp(p - K.xxx, 0.0, 1.0), c.y);
+//   }
+
+//   void main() {
+//     // Define five colors in HSV space (converted from the HSL values)
+//     vec3 color1_hsv = vec3(190.0 / 360.0, 0.95, 0.78);  // Non-Photo Blue
+//     vec3 color2_hsv = vec3(228.0 / 360.0, 0.46, 0.59);  // Glaucous-2
+//     vec3 color3_hsv = vec3(292.0 / 360.0, 0.56, 0.70);  // French Mauve
+//     vec3 color4_hsv = vec3(345.0 / 360.0, 0.82, 0.58);  // Cerise
+//     vec3 color5_hsv = vec3(32.0 / 360.0, 0.93, 0.73);   // Fawn
+
+//     // Convert HSV to RGB
+//     vec3 color1 = hsv2rgb(color1_hsv);
+//     vec3 color2 = hsv2rgb(color2_hsv);
+//     vec3 color3 = hsv2rgb(color3_hsv);
+//     vec3 color4 = hsv2rgb(color4_hsv);
+//     vec3 color5 = hsv2rgb(color5_hsv);
+
+//     // Create a gradient effect based on the incoming color vector
+//     float t = color.x;  // Use color.x (or any component) to control the gradient
+
+//     // Interpolate between the colors to create a smooth gradient
+//     vec3 gradientColor;
+//     if (t < 0.25) {
+//       // Interpolate between color1 and color2 in the first quarter
+//       gradientColor = mix(color1, color2, t / 0.25);
+//     } else if (t < 0.5) {
+//       // Interpolate between color2 and color3 in the second quarter
+//       gradientColor = mix(color2, color3, (t - 0.25) / 0.25);
+//     } else if (t < 0.75) {
+//       // Interpolate between color3 and color4 in the third quarter
+//       gradientColor = mix(color3, color4, (t - 0.5) / 0.25);
+//     } else {
+//       // Interpolate between color4 and color5 in the final quarter
+//       gradientColor = mix(color4, color5, (t - 0.75) / 0.25);
+//     }
+
+//     Color = vec4(gradientColor, 1.0);  // Apply the final color
+//   }`;   
+ const pr = new_program(vert, frag);
     gl.useProgram(pr);
     gl.uniformMatrix4fv(uloc(pr, "proj"), !1, ortho_proj());
     gl.uniform1i(uloc(pr, "map"), 0);

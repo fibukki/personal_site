@@ -15,7 +15,6 @@
 html {
   --side: max(100vw, 100vh);
 }
-
 html,
 body {
   width: 100%;
@@ -348,7 +347,7 @@ nav.navbar {
   object-position: center top;
   width: -webkit-fill-available;
   height: 400px;
-  filter: grayscale(1);
+  /* filter: grayscale(1); */
 }
 
 .card-title {
@@ -600,7 +599,7 @@ nav.navbar {
   width: 100%;
   border-radius: 14px;
   overflow: hidden;
-  filter: grayscale(1);
+  /* filter: grayscale(1); */
 }
 
 .gallery-item p {
